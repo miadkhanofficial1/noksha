@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="bn" data-lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="js/theme.js"></script>
+<title>Noksha — বাংলা গ্রাফিক রিসোর্সের বিশাল ভান্ডার</title>
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/cursor.css">
+</head>
+<body data-root=".">
+<script src="js/layout.js"></script>
+<script>renderHeader('home');</script>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">
+      <span lang-block="bn">✦ ৫০,০০০+ ডিজাইন ফাইল</span>
+      <span lang-block="en">✦ 50,000+ Design Files</span>
+    </div>
+    <h1 lang-block="bn">বাংলা গ্রাফিক রিসোর্সের বিশাল ভান্ডার</h1>
+    <h1 lang-block="en">A Vast Library of Bengali Graphic Resources</h1>
+    <p lang-block="bn">ব্যানার, পোস্টার, ভিজিটিং কার্ড থেকে শুরু করে টাইপোগ্রাফি পর্যন্ত — প্রিন্ট-রেডি ডিজাইন খুঁজুন, ডাউনলোড করুন এবং ব্যবহার করুন।</p>
+    <p lang-block="en">From banners and posters to business cards and typography — find, download and use print-ready designs.</p>
+    <p lang-block="bn">আপনার সাধারণ ছবি থেকে শুরু করে জটিল আর্টওয়ার্ক পর্যন্ত — এআই-এর মাধ্যমে যেকোনো ইমেজ রি-জেনারেট করুন, কাস্টমাইজ করুন এবং নতুন রূপ দিন।</p>
+<p lang-block="en">From simple photos to complex artwork — regenerate, customize, and recreate any image using advanced AI.</p>
+    <!-- ============ WORKING HOMEPAGE SEARCH ============ -->
+    <form class="search-pill" onsubmit="return submitHeroSearch(event)">
+      <input type="text" id="hero-search-input" placeholder="ব্যানার, পোস্টার, লোগো খুঁজুন...">
+      <button type="submit" lang-block="bn">খুঁজুন</button>
+      <button type="submit" lang-block="en" style="display:none;">Search</button>
+    </form>
+    <!-- Tag pills route through the same ?q= search used everywhere else,
+         so clicking one runs a real search instead of going nowhere. -->
+    <div class="tag-row">
+      <a class="tag-pill" href="pages/category.html?q=ব্যানার" lang-block="bn">ব্যানার ডিজাইন</a>
+      <a class="tag-pill" href="pages/category.html?q=Banner" lang-block="en">Banner Design</a>
+      <a class="tag-pill" href="pages/category.html?q=পোস্টার" lang-block="bn">পোস্টার ডিজাইন</a>
+      <a class="tag-pill" href="pages/category.html?q=Poster" lang-block="en">Poster Design</a>
+      <a class="tag-pill" href="pages/category.html?q=কার্ড" lang-block="bn">ভিজিটিং কার্ড</a>
+      <a class="tag-pill" href="pages/category.html?q=Card" lang-block="en">Business Card</a>
+      <a class="tag-pill" href="pages/category.html?q=ঈদ" lang-block="bn">ঈদ ব্যানার</a>
+      <a class="tag-pill" href="pages/category.html?q=Eid" lang-block="en">Eid Banner</a>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2 lang-block="bn">ক্যাটাগরি ব্রাউজ করুন</h2>
+        <h2 lang-block="en">Browse Categories</h2>
+        <p lang-block="bn">আপনার প্রয়োজন অনুযায়ী ক্যাটাগরি বেছে নিন</p>
+        <p lang-block="en">Pick a category that fits your project</p>
+      </div>
+      <a class="see-all" href="pages/category.html" lang-block="bn">সব দেখুন →</a>
+      <a class="see-all" href="pages/category.html" lang-block="en">See all →</a>
+    </div>
+    <div class="cat-grid" id="cat-grid"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2 lang-block="bn">নতুন আপলোড করা ডিজাইন</h2>
+        <h2 lang-block="en">Recently Uploaded Designs</h2>
+        <p lang-block="bn">আমাদের ডিজাইনারদের সাম্প্রতিক কাজ</p>
+        <p lang-block="en">Fresh work from our designer community</p>
+      </div>
+      <a class="see-all" href="pages/category.html" lang-block="bn">আরো দেখুন →</a>
+      <a class="see-all" href="pages/category.html" lang-block="en">View more →</a>
+    </div>
+    <div class="design-grid" id="design-grid"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2 lang-block="bn">জনপ্রিয় কালেকশন</h2>
+        <h2 lang-block="en">Popular Collections</h2>
+        <p lang-block="bn">সাজানো গোছানো থিমভিত্তিক ডিজাইন সেট</p>
+        <p lang-block="en">Curated, theme-based design bundles</p>
+      </div>
+    </div>
+    <div class="design-grid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr));" id="collection-grid"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2 lang-block="bn">আপনার মতো ক্রিয়েটিভদের জন্য, এটি সবচেয়ে স্মার্ট পছন্দ</h2>
+        <h2 lang-block="en">The Smartest Choice for Creatives Like You</h2>
+      </div>
+    </div>
+    <div class="feature-strip">
+      <div class="feature-item">
+        <div class="ic">🎨</div>
+        <h4 lang-block="bn">উন্নত মানের টেমপ্লেট</h4>
+        <h4 lang-block="en">Premium Quality Templates</h4>
+        <p lang-block="bn">আপনার কাজকে প্রফেশনাল দেখাতে মানসম্পন্ন ডিজাইন</p>
+        <p lang-block="en">Professional-grade designs for your projects</p>
+      </div>
+      <div class="feature-item">
+        <div class="ic">🖨️</div>
+        <h4 lang-block="bn">প্রিন্ট-রেডি ফাইল</h4>
+        <h4 lang-block="en">Print-Ready Files</h4>
+        <p lang-block="bn">হাজার হাজার রেডি-টু-প্রিন্ট ডিজাইন ডাউনলোড করুন</p>
+        <p lang-block="en">Download thousands of ready-to-print designs</p>
+      </div>
+      <div class="feature-item">
+        <div class="ic">⚡</div>
+        <h4 lang-block="bn">প্রতিদিন নতুন ডিজাইন</h4>
+        <h4 lang-block="en">New Designs Daily</h4>
+        <p lang-block="bn">প্রতিদিন হাজারো নতুন ডিজাইন আপলোড হয়</p>
+        <p lang-block="en">Thousands of new uploads added every day</p>
+      </div>
+      <div class="feature-item">
+        <div class="ic">💬</div>
+        <h4 lang-block="bn">২৪/৭ গ্রাহক সহায়তা</h4>
+        <h4 lang-block="en">24/7 Customer Support</h4>
+        <p lang-block="bn">যেকোনো সময় আমাদের সহায়তা টিমের সাথে যোগাযোগ করুন</p>
+        <p lang-block="en">Reach our support team anytime you need help</p>
+      </div>
+      <div class="feature-item">
+        <div class="ic">🎨</div>
+        <h4 lang-block="bn">এআই ইমেজ রি-জেনারেশন</h4>
+        <h4 lang-block="en">AI Image Regeneration</h4>
+        <p lang-block="bn">আপনার ছবিগুলোকে এআই-এর মাধ্যমে নতুন রূপ দিন</p>
+        <p lang-block="en">Recreate and enhance your images using advanced AI</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="cta-band">
+      <h2 lang-block="bn">আপনার ডিজাইন আপলোড করতে এখনই সাইন আপ করুন</h2>
+      <h2 lang-block="en">Sign Up Now to Upload Your Designs</h2>
+      <p lang-block="bn">দেশের সেরা ডিজাইনারদের গ্রুপে যোগ দিন এবং আয় শুরু করুন</p>
+      <p lang-block="en">Join the country's top designer community and start earning</p>
+      <a href="pages/seller-page.html" class="btn btn-primary" lang-block="bn">ডিজাইনার হিসেবে সাইন আপ →</a>
+      <a href="pages/seller-page.html" class="btn btn-primary" lang-block="en">Sign Up as a Designer →</a>
+    </div>
+  </section>
+</div>
+
+<script>renderFooter();</script>
+<script src="js/cursor.js"></script>
+<script src="js/data.js"></script>
+<script>
+  // Sends the visitor to the search/category page with whatever they
+  // typed in the homepage hero search box, as a ?q= URL parameter.
+  function submitHeroSearch(event) {
+    event.preventDefault();
+    const query = document.getElementById('hero-search-input').value.trim();
+    window.location.href = 'pages/category.html' + (query ? `?q=${encodeURIComponent(query)}` : '');
+    return false;
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    renderCategoryGrid('cat-grid');
+    renderDesignGrid('design-grid', GB_DESIGNS.slice(0, 10));
+    renderCollectionGrid('collection-grid', GB_COLLECTIONS);
+  });
+</script>
+</body>
+</html>

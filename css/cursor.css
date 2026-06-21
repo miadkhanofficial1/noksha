@@ -1,0 +1,308 @@
+/* ============================================================
+   NOKSHA — Cursor · Entry Animation · Smart FX
+   Logo palette: #1C1259 navy | #EE4367 pink | #FF7800 orange
+   ============================================================ */
+
+/* ── Hide native cursor globally ── */
+*, *::before, *::after { cursor: none !important; }
+
+/* ══════════════════════════════════════════
+   CUSTOM CURSOR
+══════════════════════════════════════════ */
+#nk-cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #EE4367;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width .15s, height .15s, background .15s;
+  will-change: transform;
+}
+#nk-cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 2px solid #1C1259;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width .2s, height .2s, border-color .2s, opacity .2s;
+  will-change: transform;
+}
+#nk-cursor-trail {
+  position: fixed;
+  top: 0; left: 0;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  border: 1px solid rgba(238,67,103,0.18);
+  pointer-events: none;
+  z-index: 99997;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+/* Hover state */
+#nk-cursor-dot.hovering {
+  width: 14px; height: 14px;
+  background: #FF7800;
+}
+#nk-cursor-ring.hovering {
+  width: 52px; height: 52px;
+  border-color: #FF7800;
+  background: rgba(255,120,0,0.07);
+}
+
+/* Click state */
+#nk-cursor-dot.clicking {
+  width: 5px; height: 5px;
+  background: #1C1259;
+}
+#nk-cursor-ring.clicking {
+  width: 28px; height: 28px;
+  border-color: #EE4367;
+}
+
+[data-theme="dark"] #nk-cursor-ring { border-color: #7C72D9; }
+[data-theme="dark"] #nk-cursor-dot  { background: #EE4367; }
+
+/* ── Sparkle trail ── */
+.nk-sparkle {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99996;
+  transform: translate(-50%, -50%);
+  animation: nk-sparkle-out 0.7s ease forwards;
+}
+@keyframes nk-sparkle-out {
+  0%   { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%,-50%) scale(0) translateY(-18px); }
+}
+
+/* ── Click burst ── */
+.nk-burst-particle {
+  position: fixed;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99996;
+  transform: translate(-50%, -50%);
+  animation: nk-burst 0.55s ease-out forwards;
+}
+@keyframes nk-burst {
+  0%   { opacity: 1; transform: translate(-50%,-50%) translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(-50%,-50%) translate(var(--dx),var(--dy)) scale(0); }
+}
+
+/* ── Click ripple ── */
+.nk-ripple {
+  position: fixed;
+  width: 0; height: 0;
+  border-radius: 50%;
+  border: 2px solid #EE4367;
+  pointer-events: none;
+  z-index: 99995;
+  transform: translate(-50%, -50%);
+  animation: nk-ripple-out 0.65s ease-out forwards;
+}
+@keyframes nk-ripple-out {
+  0%   { width: 0; height: 0; opacity: 0.9; }
+  100% { width: 80px; height: 80px; opacity: 0; }
+}
+
+/* ══════════════════════════════════════════
+   FLOATING BACKGROUND PARTICLES CANVAS
+══════════════════════════════════════════ */
+#nk-particles-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ══════════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════════ */
+.nk-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.nk-revealed {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* ══════════════════════════════════════════
+   ENTRY / LOADING ANIMATION
+══════════════════════════════════════════ */
+#noksha-entry {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #1C1259;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: entry-bg-in 0.4s ease;
+}
+@keyframes entry-bg-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+#noksha-entry.entry-fade-out {
+  animation: entry-fade-out 0.65s ease forwards;
+}
+@keyframes entry-fade-out {
+  0%   { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.06); pointer-events: none; }
+}
+
+.entry-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Logo + rings */
+.entry-logo-wrap {
+  position: relative;
+  width: 120px; height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.entry-logo-img {
+  width: 80px; height: 80px;
+  border-radius: 18px;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  animation: entry-logo-pop 0.6s cubic-bezier(.34,1.56,.64,1) 0.2s both;
+}
+@keyframes entry-logo-pop {
+  from { opacity: 0; transform: scale(0.4) rotate(-15deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+.entry-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: entry-ring-expand 1.2s ease-out forwards;
+}
+.entry-ring-1 {
+  width: 108px; height: 108px;
+  border-color: rgba(238,67,103,0.6);
+  animation-delay: 0.3s;
+}
+.entry-ring-2 {
+  width: 144px; height: 144px;
+  border-color: rgba(255,120,0,0.35);
+  animation-delay: 0.5s;
+}
+.entry-ring-3 {
+  width: 180px; height: 180px;
+  border-color: rgba(238,67,103,0.18);
+  animation-delay: 0.7s;
+}
+@keyframes entry-ring-expand {
+  0%   { transform: translate(-50%,-50%) scale(0); opacity: 1; }
+  70%  { opacity: 0.7; }
+  100% { transform: translate(-50%,-50%) scale(1); opacity: 0; }
+}
+
+/* Brand name */
+.entry-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: entry-text-in 0.5s ease 0.55s both;
+}
+@keyframes entry-text-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.entry-bn {
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+.entry-en {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Progress bar */
+.entry-bar {
+  width: 160px;
+  height: 3px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 99px;
+  overflow: hidden;
+  animation: entry-text-in 0.4s ease 0.7s both;
+}
+.entry-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #EE4367, #FF7800);
+  animation: entry-bar-fill 1.6s cubic-bezier(.4,0,.2,1) 0.7s both;
+}
+@keyframes entry-bar-fill {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* Tagline */
+.entry-tagline {
+  font-family: 'Noto Sans Bengali', sans-serif;
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.04em;
+  animation: entry-text-in 0.4s ease 0.9s both;
+}
+
+/* ── Header logo glow on hover ── */
+.logo:hover .logo-img {
+  filter: drop-shadow(0 0 8px rgba(238,67,103,0.55));
+  transition: filter 0.3s ease;
+}
+
+/* ── Button shine effect ── */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: -50%; left: -75%;
+  width: 50%; height: 200%;
+  background: rgba(255,255,255,0.18);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+.btn-primary:hover::after { left: 130%; }
+
+/* ── Card hover glow ── */
+.design-card:hover {
+  box-shadow: 0 8px 32px rgba(238,67,103,0.18), 0 2px 8px rgba(28,18,89,0.12);
+}
+.cat-card:hover {
+  box-shadow: 0 6px 24px rgba(255,120,0,0.15);
+  border-color: #FF7800 !important;
+}

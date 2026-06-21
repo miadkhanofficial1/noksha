@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="bn" data-lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../js/theme.js"></script>
+<title>ডাউনলোড — Noksha</title>
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/pages.css">
+<link rel="stylesheet" href="../css/cursor.css">
+</head>
+<body data-root="..">
+<script src="../js/layout.js"></script>
+<script>renderHeader();</script>
+
+<div class="page-band">
+  <div class="container">
+    <h1 lang-block="bn">✅ আপনার ফাইল প্রস্তুত</h1>
+    <h1 lang-block="en">✅ Your Files Are Ready</h1>
+    <p lang-block="bn">অর্ডার #GB-20260619-৮৮২ — নিচে থেকে ডাউনলোড করুন</p>
+    <p lang-block="en">Order #GB-20260619-882 — download your files below</p>
+  </div>
+</div>
+
+<div class="container section">
+  <div id="download-list"></div>
+
+  <div class="panel-card center" style="margin-top:30px;">
+    <h3 lang-block="bn">ফাইল ডাউনলোডে সমস্যা হচ্ছে?</h3>
+    <h3 lang-block="en">Having trouble downloading?</h3>
+    <p class="muted" lang-block="bn">আপনি যেকোনো সময় আপনার ড্যাশবোর্ডের "আমার ডাউনলোড" সেকশন থেকে পুনরায় ডাউনলোড করতে পারবেন।</p>
+    <p class="muted" lang-block="en">You can always re-download from the "My Downloads" section in your dashboard.</p>
+    <a href="dashboard.html?tab=downloads" class="btn btn-outline" lang-block="bn">ড্যাশবোর্ডে যান</a>
+    <a href="dashboard.html?tab=downloads" class="btn btn-outline" lang-block="en">Go to Dashboard</a>
+  </div>
+</div>
+
+<script>renderFooter();</script>
+<script src="../js/cursor.js"></script>
+<script src="../js/data.js"></script>
+<script>
+  function paintDownloads() {
+    const lang = document.documentElement.getAttribute('data-lang') || 'bn';
+    const sample = GB_DESIGNS.slice(0, 3);
+    document.getElementById('download-list').innerHTML = sample.map(d => `
+      <div class="download-item">
+        <div class="swatch ${d.swatch}" style="width:80px;height:80px;border-radius:8px;"></div>
+        <div>
+          <h4>${d.title[lang]}</h4>
+          <span class="file-format-tag">PSD</span><span class="file-format-tag">AI</span><span class="file-format-tag">PNG</span>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="showToast('${lang === 'en' ? 'Download started' : 'ডাউনলোড শুরু হয়েছে'}')">
+          ⬇ ${lang === 'en' ? 'Download' : 'ডাউনলোড'}
+        </button>
+      </div>`).join('');
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    paintDownloads();
+    document.querySelectorAll('.lang-toggle button').forEach(b => b.addEventListener('click', paintDownloads));
+  });
+</script>
+</body>
+</html>

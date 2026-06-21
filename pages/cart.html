@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="bn" data-lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../js/theme.js"></script>
+<title>কার্ট — Noksha</title>
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/pages.css">
+<link rel="stylesheet" href="../css/cursor.css">
+</head>
+<body data-root="..">
+<script src="../js/layout.js"></script>
+<script>renderHeader();</script>
+
+<div class="page-band">
+  <div class="container">
+    <h1 lang-block="bn">আপনার কার্ট</h1>
+    <h1 lang-block="en">Your Cart</h1>
+    <p lang-block="bn">কেনাকাটা সম্পন্ন করার আগে আইটেম পর্যালোচনা করুন</p>
+    <p lang-block="en">Review your items before checking out</p>
+  </div>
+</div>
+
+<div class="container section">
+  <div class="cart-layout" id="cart-layout">
+    <div id="cart-items-col">
+      <div id="cart-items-list"></div>
+    </div>
+    <div class="summary-card">
+      <h3 lang-block="bn">অর্ডার সারাংশ</h3>
+      <h3 lang-block="en">Order Summary</h3>
+      <div class="summary-row">
+        <span lang-block="bn">সাবটোটাল</span><span lang-block="en" style="display:none;">Subtotal</span>
+        <span class="val" id="sum-subtotal">৳০</span>
+      </div>
+      <div class="summary-row">
+        <span lang-block="bn">ভ্যাট (৫%)</span><span lang-block="en" style="display:none;">VAT (5%)</span>
+        <span class="val" id="sum-vat">৳০</span>
+      </div>
+      <div class="coupon-row">
+        <input type="text" placeholder="কুপন কোড" id="coupon-input">
+        <button class="btn btn-outline btn-sm" onclick="applyCoupon()" lang-block="bn">প্রয়োগ</button>
+        <button class="btn btn-outline btn-sm" onclick="applyCoupon()" lang-block="en" style="display:none;">Apply</button>
+      </div>
+      <div class="summary-row total">
+        <span lang-block="bn">মোট</span><span lang-block="en" style="display:none;">Total</span>
+        <span class="val" id="sum-total">৳০</span>
+      </div>
+      <a href="checkout.html" class="btn btn-primary btn-block" style="margin-top:16px;" lang-block="bn">চেকআউটে যান →</a>
+      <a href="checkout.html" class="btn btn-primary btn-block" style="margin-top:16px;" lang-block="en">Proceed to Checkout →</a>
+      <a href="category.html" class="btn btn-outline btn-block" style="margin-top:10px;" lang-block="bn">কেনাকাটা চালিয়ে যান</a>
+      <a href="category.html" class="btn btn-outline btn-block" style="margin-top:10px;" lang-block="en">Continue Shopping</a>
+    </div>
+  </div>
+</div>
+
+<script>renderFooter();</script>
+<script src="../js/cursor.js"></script>
+<script src="../js/data.js"></script>
+<script>
+  let couponApplied = false;
+
+  function paintCart() {
+    const lang = document.documentElement.getAttribute('data-lang') || 'bn';
+    const items = GBCart.get();
+    const listEl = document.getElementById('cart-items-list');
+
+    if (items.length === 0) {
+      listEl.innerHTML = `
+        <div class="empty-cart">
+          <div class="ic">🛒</div>
+          <h3 lang-block="bn">আপনার কার্ট খালি</h3>
+          <h3 lang-block="en">Your cart is empty</h3>
+          <p class="muted" lang-block="bn">ব্রাউজ করা শুরু করুন এবং পছন্দের ডিজাইন যোগ করুন</p>
+          <p class="muted" lang-block="en">Start browsing and add some designs you love</p>
+          <a href="category.html" class="btn btn-primary" style="margin-top:10px;" lang-block="bn">ব্রাউজ করুন</a>
+          <a href="category.html" class="btn btn-primary" style="margin-top:10px;" lang-block="en">Browse Designs</a>
+        </div>`;
+    } else {
+      listEl.innerHTML = items.map(it => `
+        <div class="cart-item">
+          <div class="swatch ${it.swatch || 's1'}" style="width:90px;height:90px;border-radius:8px;"></div>
+          <div>
+            <h4>${it.title}</h4>
+            <div class="meta">${priceLabel(it.price, lang)} <span lang-block="bn">প্রতি কপি</span><span lang-block="en" style="display:none;">each</span></div>
+          </div>
+          <div class="qty-stepper">
+            <button onclick="GBCart.setQty('${it.id}', ${it.qty - 1}); paintCart();">−</button>
+            <span>${it.qty}</span>
+            <button onclick="GBCart.setQty('${it.id}', ${it.qty + 1}); paintCart();">+</button>
+          </div>
+          <div class="design-price ${it.price === 0 ? 'free' : ''}">${priceLabel(it.price * it.qty, lang)}</div>
+          <button class="remove-btn" onclick="GBCart.remove('${it.id}'); paintCart();">✕</button>
+        </div>`).join('');
+    }
+    applyLangToNode(listEl);
+
+    const subtotal = GBCart.total();
+    const vat = Math.round(subtotal * 0.05);
+    const discount = couponApplied ? Math.round(subtotal * 0.1) : 0;
+    const total = subtotal + vat - discount;
+    document.getElementById('sum-subtotal').textContent = '৳' + subtotal;
+    document.getElementById('sum-vat').textContent = '৳' + vat;
+    document.getElementById('sum-total').textContent = '৳' + total;
+  }
+
+  function applyCoupon() {
+    couponApplied = true;
+    const lang = document.documentElement.getAttribute('data-lang') || 'bn';
+    showToast(lang === 'en' ? 'Coupon applied: 10% off' : 'কুপন প্রয়োগ হয়েছে: ১০% ছাড়');
+    paintCart();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    paintCart();
+    document.querySelectorAll('.lang-toggle button').forEach(b => b.addEventListener('click', paintCart));
+  });
+</script>
+</body>
+</html>

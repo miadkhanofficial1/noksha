@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="bn" data-lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../js/theme.js"></script>
+<title>সাইন আপ — Noksha</title>
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/pages.css">
+<link rel="stylesheet" href="../css/cursor.css">
+</head>
+<body data-root="..">
+<script src="../js/layout.js"></script>
+<script>renderHeader();</script>
+
+<div class="auth-shell">
+  <div class="auth-visual">
+    <h2 lang-block="bn">দেশের সেরা ডিজাইনারদের গ্রুপে যোগ দিন</h2>
+    <h2 lang-block="en">Join the country's top designer community</h2>
+    <p lang-block="bn">আপনার ডিজাইন আপলোড করুন, বিক্রি করুন এবং প্রতি মাসে আয় করুন। অথবা ক্রেতা হিসেবে যোগ দিয়ে হাজারো ডিজাইন ব্যবহার করুন।</p>
+    <p lang-block="en">Upload your designs, sell them, and earn every month. Or join as a buyer to access thousands of designs.</p>
+    <div class="auth-stats">
+      <div><strong>৳২.৫ Cr+</strong><span lang-block="bn">পরিশোধিত আয়</span><span lang-block="en" style="display:none;">Paid to Designers</span></div>
+      <div><strong>৯৮%</strong><span lang-block="bn">সন্তুষ্ট গ্রাহক</span><span lang-block="en" style="display:none;">Satisfaction Rate</span></div>
+    </div>
+  </div>
+  <div class="auth-form-side">
+    <div class="auth-form-wrap">
+      <h1 lang-block="bn">অ্যাকাউন্ট তৈরি করুন</h1>
+      <h1 lang-block="en">Create an Account</h1>
+      <p class="muted" style="margin-bottom:24px;">
+        <span lang-block="bn">আগে থেকে অ্যাকাউন্ট আছে? </span><span lang-block="en" style="display:none;">Already have an account? </span>
+        <a href="login.html" style="color:var(--purple-dark); font-weight:700;" lang-block="bn">লগইন করুন</a>
+        <a href="login.html" style="color:var(--purple-dark); font-weight:700;" lang-block="en">Log in</a>
+      </p>
+
+      <div class="role-toggle">
+        <button type="button" class="active" data-role="buyer" lang-block="bn">ক্রেতা হিসেবে যোগ দিন</button>
+        <button type="button" class="active" data-role="buyer" lang-block="en" style="display:none;">Join as Buyer</button>
+        <button type="button" data-role="seller" lang-block="bn">ডিজাইনার হিসেবে যোগ দিন</button>
+        <button type="button" data-role="seller" lang-block="en" style="display:none;">Join as Designer</button>
+      </div>
+
+      <form onsubmit="return demoSubmit(event, 'login.html', document.documentElement.getAttribute('data-lang')==='en' ? 'Account created — please log in' : 'অ্যাকাউন্ট তৈরি হয়েছে — লগইন করুন')">
+        <div class="field-row">
+          <div class="field">
+            <label lang-block="bn">পুরো নাম</label>
+            <label lang-block="en">Full Name</label>
+            <input type="text" placeholder="মোঃ করিম" required>
+          </div>
+          <div class="field">
+            <label lang-block="bn">ফোন নম্বর</label>
+            <label lang-block="en">Phone Number</label>
+            <input type="tel" placeholder="01XXXXXXXXX" required>
+          </div>
+        </div>
+        <div class="field">
+          <label lang-block="bn">ইমেইল</label>
+          <label lang-block="en">Email</label>
+          <input type="email" placeholder="example@email.com" required>
+        </div>
+        <div class="field">
+          <label lang-block="bn">পাসওয়ার্ড</label>
+          <label lang-block="en">Password</label>
+          <input type="password" placeholder="কমপক্ষে ৮ অক্ষর" required>
+        </div>
+        <label class="checkbox-row" style="margin-bottom:18px;">
+          <input type="checkbox" required>
+          <span lang-block="bn">আমি <a href="#" style="color:var(--purple-dark);">শর্তাবলী</a> ও <a href="#" style="color:var(--purple-dark);">গোপনীয়তা নীতি</a> মেনে নিচ্ছি</span>
+          <span lang-block="en" style="display:none;">I agree to the <a href="#" style="color:var(--purple-dark);">Terms</a> and <a href="#" style="color:var(--purple-dark);">Privacy Policy</a></span>
+        </label>
+        <button type="submit" class="btn btn-primary btn-block" lang-block="bn">অ্যাকাউন্ট তৈরি করুন</button>
+        <button type="submit" class="btn btn-primary btn-block" lang-block="en" style="display:none;">Create Account</button>
+      </form>
+
+      <div class="form-divider"><span lang-block="bn">অথবা</span><span lang-block="en" style="display:none;">or</span></div>
+      <div class="social-auth-row">
+        <button class="social-auth-btn">🟦 Facebook</button>
+        <button class="social-auth-btn">🟥 Google</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>renderFooter();</script>
+<script src="../js/cursor.js"></script>
+<script src="../js/data.js"></script>
+<script>
+  document.querySelectorAll('.role-toggle button[data-role]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.role-toggle button[data-role="'+btn.dataset.role+'"]').forEach(b=>b.classList.add('active'));
+      document.querySelectorAll('.role-toggle button:not([data-role="'+btn.dataset.role+'"])').forEach(b=>b.classList.remove('active'));
+    });
+  });
+</script>
+</body>
+</html>

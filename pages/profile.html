@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="bn" data-lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../js/theme.js"></script>
+<title>প্রোফাইল — Noksha</title>
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/pages.css">
+<link rel="stylesheet" href="../css/cursor.css">
+</head>
+<body data-root="..">
+<script src="../js/layout.js"></script>
+<script>renderHeader();</script>
+
+<div class="container section">
+  <div class="dash-shell">
+    <aside class="dash-sidebar">
+      <div class="dash-user">
+        <div class="av">ক</div>
+        <div>
+          <div class="name">মোঃ করিম</div>
+          <div class="role" lang-block="bn">ক্রেতা</div>
+          <div class="role" lang-block="en" style="display:none;">Buyer</div>
+        </div>
+      </div>
+      <nav class="dash-nav">
+        <a href="dashboard.html">📊 <span lang-block="bn">ড্যাশবোর্ড</span><span lang-block="en" style="display:none;">Dashboard</span></a>
+        <a href="profile.html" class="active">👤 <span lang-block="bn">প্রোফাইল</span><span lang-block="en" style="display:none;">Profile</span></a>
+        <a href="dashboard.html?tab=orders">📦 <span lang-block="bn">অর্ডার</span><span lang-block="en" style="display:none;">Orders</span></a>
+        <a href="dashboard.html?tab=downloads">⬇️ <span lang-block="bn">ডাউনলোড</span><span lang-block="en" style="display:none;">Downloads</span></a>
+        <a href="subscription.html">⭐ <span lang-block="bn">সাবস্ক্রিপশন</span><span lang-block="en" style="display:none;">Subscription</span></a>
+        <a href="login.html">🚪 <span lang-block="bn">লগ আউট</span><span lang-block="en" style="display:none;">Log Out</span></a>
+      </nav>
+    </aside>
+
+    <div>
+      <div class="panel-card">
+        <h3 lang-block="bn">প্রোফাইল তথ্য</h3>
+        <h3 lang-block="en">Profile Information</h3>
+        <form onsubmit="return demoSubmit(event, null, document.documentElement.getAttribute('data-lang')==='en' ? 'Profile updated' : 'প্রোফাইল আপডেট হয়েছে')">
+          <div class="flex" style="gap:18px; align-items:center; margin-bottom:22px;">
+            <div style="width:72px;height:72px;border-radius:50%;background:var(--purple);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:var(--white);">ক</div>
+            <div>
+              <button type="button" class="btn btn-outline btn-sm" lang-block="bn">ছবি পরিবর্তন করুন</button>
+              <button type="button" class="btn btn-outline btn-sm" lang-block="en" style="display:none;">Change Photo</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label lang-block="bn">পুরো নাম</label><label lang-block="en">Full Name</label>
+              <input type="text" value="মোঃ করিম">
+            </div>
+            <div class="field">
+              <label lang-block="bn">ফোন নম্বর</label><label lang-block="en">Phone Number</label>
+              <input type="tel" value="01918990633">
+            </div>
+          </div>
+          <div class="field">
+            <label lang-block="bn">ইমেইল</label><label lang-block="en">Email</label>
+            <input type="email" value="karim@example.com">
+          </div>
+          <div class="field">
+            <label lang-block="bn">ঠিকানা</label><label lang-block="en">Address</label>
+            <input type="text" placeholder="বাড়ি, রোড, এলাকা, শহর">
+          </div>
+          <button type="submit" class="btn btn-primary" lang-block="bn">সংরক্ষণ করুন</button>
+          <button type="submit" class="btn btn-primary" lang-block="en" style="display:none;">Save Changes</button>
+        </form>
+      </div>
+
+      <div class="panel-card">
+        <h3 lang-block="bn">পাসওয়ার্ড পরিবর্তন</h3>
+        <h3 lang-block="en">Change Password</h3>
+        <form onsubmit="return demoSubmit(event, null, document.documentElement.getAttribute('data-lang')==='en' ? 'Password updated' : 'পাসওয়ার্ড আপডেট হয়েছে')">
+          <div class="field">
+            <label lang-block="bn">বর্তমান পাসওয়ার্ড</label><label lang-block="en">Current Password</label>
+            <input type="password" placeholder="••••••••">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label lang-block="bn">নতুন পাসওয়ার্ড</label><label lang-block="en">New Password</label>
+              <input type="password" placeholder="••••••••">
+            </div>
+            <div class="field">
+              <label lang-block="bn">নিশ্চিত করুন</label><label lang-block="en">Confirm Password</label>
+              <input type="password" placeholder="••••••••">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-dark" lang-block="bn">পাসওয়ার্ড আপডেট করুন</button>
+          <button type="submit" class="btn btn-dark" lang-block="en" style="display:none;">Update Password</button>
+        </form>
+      </div>
+
+      <div class="panel-card">
+        <h3 style="color:var(--red);" lang-block="bn">ঝুঁকিপূর্ণ অঞ্চল</h3>
+        <h3 style="color:var(--red);" lang-block="en">Danger Zone</h3>
+        <p class="muted" lang-block="bn">অ্যাকাউন্ট মুছে ফেললে সকল ডেটা স্থায়ীভাবে মুছে যাবে।</p>
+        <p class="muted" lang-block="en">Deleting your account will permanently remove all your data.</p>
+        <button class="btn btn-terracotta btn-sm" lang-block="bn">অ্যাকাউন্ট মুছুন</button>
+        <button class="btn btn-terracotta btn-sm" lang-block="en" style="display:none;">Delete Account</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>renderFooter();</script>
+<script src="../js/cursor.js"></script>
+<script src="../js/data.js"></script>
+</body>
+</html>

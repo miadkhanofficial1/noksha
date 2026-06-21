@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="bn" data-lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../js/theme.js"></script>
+<title>ডিজাইন বিস্তারিত — Noksha</title>
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/pages.css">
+<link rel="stylesheet" href="../css/cursor.css">
+</head>
+<body data-root="..">
+<script src="../js/layout.js"></script>
+<script>renderHeader();</script>
+
+<div class="container">
+  <div class="breadcrumb">
+    <a href="../index.html" lang-block="bn">হোম</a><a href="../index.html" lang-block="en" style="display:none;">Home</a>
+    <span class="sep">/</span>
+    <a href="category.html" lang-block="bn">ক্যাটাগরি</a><a href="category.html" lang-block="en" style="display:none;">Categories</a>
+    <span class="sep">/</span>
+    <span id="bc-title"></span>
+  </div>
+
+  <section class="section">
+    <div class="product-detail">
+      <div>
+        <div class="product-gallery-main" id="gallery-main"></div>
+        <div class="product-gallery-thumbs" id="gallery-thumbs"></div>
+
+        <div style="margin-top:36px;">
+          <h3 lang-block="bn">বিস্তারিত বিবরণ</h3>
+          <h3 lang-block="en">Description</h3>
+          <p class="muted" id="desc-text" lang-block="bn">এই ডিজাইনটি সম্পূর্ণ এডিটেবল লেয়ার সহ তৈরি, যা সহজেই আপনার প্রয়োজন অনুযায়ী পরিবর্তন করা যায়। প্রিন্ট ও ডিজিটাল ব্যবহারের জন্য উপযুক্ত হাই-রেজোলিউশন ফাইল।</p>
+          <p class="muted" lang-block="en" style="display:none;">This design comes with fully editable layers, easy to customize for your needs. High-resolution file suitable for both print and digital use.</p>
+        </div>
+      </div>
+
+      <div class="product-info-panel">
+        <h1 id="prod-title"></h1>
+        <div class="designer-chip">
+          <div class="av" id="designer-av"></div>
+          <div>
+            <div class="name" id="designer-name"></div>
+            <div class="role" lang-block="bn">ডিজাইনার</div>
+            <div class="role" lang-block="en" style="display:none;">Designer</div>
+          </div>
+        </div>
+        <div class="price-block">
+          <span class="now" id="price-now"></span>
+          <span class="was" id="price-was"></span>
+        </div>
+        <div class="qty-stepper" style="margin-bottom:14px;">
+          <button onclick="changeQty(-1)">−</button>
+          <span id="qty-val">1</span>
+          <button onclick="changeQty(1)">+</button>
+        </div>
+        <div class="action-row">
+          <button class="btn btn-primary btn-block" onclick="addThisToCart()">
+            <span lang-block="bn">🛒 কার্টে যোগ করুন</span>
+            <span lang-block="en" style="display:none;">🛒 Add to Cart</span>
+          </button>
+        </div>
+        <div class="action-row">
+          <a href="cart.html" class="btn btn-outline btn-block" lang-block="bn">এখনই কিনুন</a>
+          <a href="cart.html" class="btn btn-outline btn-block" lang-block="en" style="display:none;">Buy Now</a>
+          <button class="icon-btn" onclick="toggleFav(this,currentId)" id="detail-fav-btn">🤍</button>
+        </div>
+        <ul class="spec-list">
+          <li><span lang-block="bn">ফাইল ফরম্যাট</span><span lang-block="en" style="display:none;">File Format</span><strong>PSD, AI, PNG</strong></li>
+          <li><span lang-block="bn">রেজোলিউশন</span><span lang-block="en" style="display:none;">Resolution</span><strong>300 DPI</strong></li>
+          <li><span lang-block="bn">ডাউনলোড সংখ্যা</span><span lang-block="en" style="display:none;">Downloads</span><strong id="dl-count"></strong></li>
+          <li><span lang-block="bn">লাইসেন্স</span><span lang-block="en" style="display:none;">License</span><strong lang-block="bn">ব্যক্তিগত ও বাণিজ্যিক</strong><strong lang-block="en" style="display:none;">Personal & Commercial</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2 lang-block="bn">সম্পর্কিত ডিজাইন</h2>
+        <h2 lang-block="en">Related Designs</h2>
+      </div>
+    </div>
+    <div class="design-grid" id="related-grid"></div>
+  </section>
+</div>
+
+<script>renderFooter();</script>
+<script src="../js/cursor.js"></script>
+<script src="../js/data.js"></script>
+<script>
+  let currentId = new URLSearchParams(window.location.search).get('id') || 'd1';
+  let currentQty = 1;
+  const product = GB_DESIGNS.find(d => d.id === currentId) || GB_DESIGNS[0];
+
+  function paint() {
+    const lang = document.documentElement.getAttribute('data-lang') || 'bn';
+    document.getElementById('bc-title').textContent = product.title[lang];
+    document.getElementById('prod-title').textContent = product.title[lang];
+    document.getElementById('gallery-main').innerHTML = `<div class="swatch ${product.swatch}" style="height:100%;"><span>${product.title[lang]}</span></div>`;
+    document.getElementById('gallery-thumbs').innerHTML = [0,1,2,3].map(i =>
+      `<div class="swatch ${product.swatch}" style="width:76px;height:76px;border-radius:8px;opacity:${1 - i*0.15};"></div>`).join('');
+    document.getElementById('designer-av').textContent = product.designer.charAt(0);
+    document.getElementById('designer-name').textContent = product.designer;
+    document.getElementById('price-now').textContent = priceLabel(product.price, lang);
+    document.getElementById('price-was').textContent = product.price > 0 ? '৳' + (product.price + 150) : '';
+    document.getElementById('dl-count').textContent = product.downloads.toLocaleString();
+    document.getElementById('detail-fav-btn').textContent = GBFav.has(product.id) ? '❤️' : '🤍';
+    document.title = product.title[lang] + ' — Noksha';
+  }
+
+  function changeQty(delta) {
+    currentQty = Math.max(1, currentQty + delta);
+    document.getElementById('qty-val').textContent = currentQty;
+  }
+
+  function addThisToCart() {
+    const lang = document.documentElement.getAttribute('data-lang') || 'bn';
+    for (let i = 0; i < currentQty; i++) {
+      GBCart.add({ id: product.id, title: product.title[lang], price: product.price, swatch: product.swatch });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    paint();
+    renderDesignGrid('related-grid', GB_DESIGNS.filter(d => d.cat === product.cat && d.id !== product.id).slice(0, 5));
+    document.querySelectorAll('.lang-toggle button').forEach(b => b.addEventListener('click', paint));
+  });
+</script>
+</body>
+</html>

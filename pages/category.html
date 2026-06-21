@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="bn" data-lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../js/theme.js"></script>
+<title>ক্যাটাগরি ও অনুসন্ধান — Noksha</title>
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/pages.css">
+<link rel="stylesheet" href="../css/cursor.css">
+</head>
+<body data-root="..">
+<script src="../js/layout.js"></script>
+<script>renderHeader();</script>
+
+<div class="page-band">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="../index.html" lang-block="bn">হোম</a><a href="../index.html" lang-block="en" style="display:none;">Home</a>
+      <span class="sep">/</span>
+      <span lang-block="bn">ক্যাটাগরি</span><span lang-block="en" style="display:none;">Categories</span>
+    </div>
+    <h1 lang-block="bn">সব ডিজাইন ব্রাউজ করুন</h1>
+    <h1 lang-block="en">Browse All Designs</h1>
+    <p lang-block="bn">ক্যাটাগরি, মূল্য ও জনপ্রিয়তা অনুযায়ী ফিল্টার করুন</p>
+    <p lang-block="en">Filter by category, price and popularity</p>
+
+    <!-- ============ WORKING SEARCH BOX ============
+         Typing here filters the results below in real time (no page
+         reload). It also reads a ?q= value from the URL on page load,
+         so the header search icon and homepage hero search both link
+         here with a query and this box picks it up automatically. -->
+    <form class="search-pill" style="max-width:640px; margin-top:18px;" onsubmit="return false;">
+      <input type="text" id="search-input" placeholder="খুঁজুন..." oninput="runSearch()">
+      <button type="button" onclick="runSearch()" lang-block="bn">খুঁজুন</button>
+      <button type="button" onclick="runSearch()" lang-block="en" style="display:none;">Search</button>
+    </form>
+  </div>
+</div>
+
+<div class="container section">
+  <div class="browse-layout">
+    <aside class="filter-box">
+      <div class="filter-group">
+        <h5 lang-block="bn">ক্যাটাগরি</h5>
+        <h5 lang-block="en" style="display:none;">Category</h5>
+        <div id="filter-cats"></div>
+      </div>
+      <div class="filter-group">
+        <h5 lang-block="bn">মূল্য</h5>
+        <h5 lang-block="en" style="display:none;">Price</h5>
+        <label class="filter-option"><input type="radio" name="price" value="all" checked> <span lang-block="bn">সব</span><span lang-block="en" style="display:none;">All</span></label>
+        <label class="filter-option"><input type="radio" name="price" value="free"> <span lang-block="bn">ফ্রি</span><span lang-block="en" style="display:none;">Free</span></label>
+        <label class="filter-option"><input type="radio" name="price" value="premium"> <span lang-block="bn">প্রিমিয়াম</span><span lang-block="en" style="display:none;">Premium</span></label>
+      </div>
+      <div class="filter-group">
+        <h5 lang-block="bn">ফাইল ফরম্যাট</h5>
+        <h5 lang-block="en" style="display:none;">File Format</h5>
+        <label class="filter-option"><input type="checkbox" checked> PSD</label>
+        <label class="filter-option"><input type="checkbox" checked> AI</label>
+        <label class="filter-option"><input type="checkbox"> PNG</label>
+        <label class="filter-option"><input type="checkbox"> PDF</label>
+      </div>
+      <button class="btn btn-outline btn-block btn-sm" onclick="clearFilters()">
+        <span lang-block="bn">ফিল্টার মুছে ফেলুন</span>
+        <span lang-block="en" style="display:none;">Clear Filters</span>
+      </button>
+    </aside>
+
+    <div>
+      <div class="results-toolbar">
+        <span class="muted" id="result-count"></span>
+        <select class="sort-select" id="sort-select">
+          <option value="newest" lang-block="bn">নতুন আগে</option>
+          <option value="newest" lang-block="en" style="display:none;">Newest First</option>
+          <option value="popular" lang-block="bn">জনপ্রিয়তা</option>
+          <option value="popular" lang-block="en" style="display:none;">Most Popular</option>
+          <option value="price-low" lang-block="bn">কম মূল্য আগে</option>
+          <option value="price-low" lang-block="en" style="display:none;">Price: Low to High</option>
+        </select>
+      </div>
+      <div class="design-grid" id="search-results"></div>
+    </div>
+  </div>
+</div>
+
+<script>renderFooter();</script>
+<script src="../js/cursor.js"></script>
+<script src="../js/data.js"></script>
+<script>
+  /* ======================================================================
+     WORKING SEARCH + FILTER + SORT (pages/category.html)
+     ======================================================================
+     Everything below reacts live — no page reloads. The full flow is:
+
+       1. runSearch() reads: the search text box, the checked category
+          checkboxes, the selected price radio button, and the sort
+          dropdown.
+       2. It filters GB_DESIGNS (defined in js/data.js) to match all of
+          those conditions at once.
+       3. It re-renders the results grid with renderDesignGrid().
+
+     The page also reads ?q=... and ?c=... from the URL on first load,
+     so links like "category.html?q=banner" or "category.html?c=poster"
+     (used by the homepage search bar and header search icon) arrive
+     here pre-filtered automatically.
+     ====================================================================== */
+
+  function renderFilterCats() {
+    const wrap = document.getElementById('filter-cats');
+    wrap.innerHTML = GB_CATEGORIES.map(c => `
+      <label class="filter-option">
+        <input type="checkbox" data-cat="${c.id}" onchange="runSearch()">
+        <span lang-block="bn">${c.bn}</span><span lang-block="en" style="display:none;">${c.en}</span>
+      </label>`).join('');
+    applyLangToNode(wrap);
+  }
+
+  function getCheckedCategories() {
+    return Array.from(document.querySelectorAll('#filter-cats input[type="checkbox"]:checked'))
+      .map(el => el.dataset.cat);
+  }
+
+  function getPriceFilter() {
+    const checked = document.querySelector('input[name="price"]:checked');
+    return checked ? checked.value : 'all';
+  }
+
+  function runSearch() {
+    const lang = document.documentElement.getAttribute('data-lang') || 'bn';
+    const query = (document.getElementById('search-input').value || '').trim().toLowerCase();
+    const activeCats = getCheckedCategories();
+    const priceMode = getPriceFilter();
+    const sortMode = document.getElementById('sort-select').value;
+
+    let results = GB_DESIGNS.filter(d => {
+      // --- text match: checks BOTH Bangla and English titles, so a
+      // search works regardless of which language the visitor is using ---
+      const matchesQuery = !query ||
+        d.title.bn.toLowerCase().includes(query) ||
+        d.title.en.toLowerCase().includes(query) ||
+        d.designer.toLowerCase().includes(query);
+
+      // --- category match: if no category checkboxes are checked, show all ---
+      const matchesCategory = activeCats.length === 0 || activeCats.includes(d.cat);
+
+      // --- price match ---
+      const matchesPrice =
+        priceMode === 'all' ||
+        (priceMode === 'free' && d.price === 0) ||
+        (priceMode === 'premium' && d.price > 0);
+
+      return matchesQuery && matchesCategory && matchesPrice;
+    });
+
+    // --- sort ---
+    if (sortMode === 'popular') {
+      results = results.slice().sort((a, b) => b.downloads - a.downloads);
+    } else if (sortMode === 'price-low') {
+      results = results.slice().sort((a, b) => a.price - b.price);
+    }
+    // 'newest' = keep original array order (already newest-first in data.js)
+
+    renderDesignGrid('search-results', results);
+
+    const countEl = document.getElementById('result-count');
+    countEl.textContent = lang === 'en'
+      ? `${results.length} results found`
+      : `${results.length} টি ফলাফল পাওয়া গেছে`;
+
+    // Show a clear "no results" message instead of an empty blank area
+    if (results.length === 0) {
+      document.getElementById('search-results').innerHTML = `
+        <div class="empty-cart" style="grid-column:1/-1;">
+          <div class="ic">🔍</div>
+          <h3 lang-block="bn">কোনো ফলাফল পাওয়া যায়নি</h3>
+          <h3 lang-block="en">No results found</h3>
+          <p class="muted" lang-block="bn">ভিন্ন কীওয়ার্ড বা ফিল্টার দিয়ে আবার চেষ্টা করুন</p>
+          <p class="muted" lang-block="en">Try a different keyword or filter combination</p>
+        </div>`;
+      applyLangToNode(document.getElementById('search-results'));
+    }
+  }
+
+  function clearFilters() {
+    document.getElementById('search-input').value = '';
+    document.querySelectorAll('#filter-cats input[type="checkbox"]').forEach(cb => cb.checked = false);
+    document.querySelectorAll('input[name="price"]').forEach(r => r.checked = (r.value === 'all'));
+    document.getElementById('sort-select').value = 'newest';
+    runSearch();
+  }
+
+  function applyUrlParamsOnLoad() {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('q');
+    const c = params.get('c');
+    if (q) document.getElementById('search-input').value = q;
+    if (c) {
+      const box = document.querySelector(`#filter-cats input[data-cat="${c}"]`);
+      if (box) box.checked = true;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderFilterCats();
+    applyUrlParamsOnLoad();
+    runSearch();
+    document.getElementById('sort-select').addEventListener('change', runSearch);
+    document.querySelectorAll('input[name="price"]').forEach(r => r.addEventListener('change', runSearch));
+    document.querySelectorAll('.lang-toggle button').forEach(b => b.addEventListener('click', runSearch));
+  });
+</script>
+</body>
+</html>

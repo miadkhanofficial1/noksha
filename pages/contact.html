@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="bn" data-lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../js/theme.js"></script>
+<title>যোগাযোগ — Noksha</title>
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/pages.css">
+<link rel="stylesheet" href="../css/cursor.css">
+</head>
+<body data-root="..">
+<script src="../js/layout.js"></script>
+<script>renderHeader();</script>
+
+<div class="page-band">
+  <div class="container">
+    <h1 lang-block="bn">আমাদের সাথে যোগাযোগ করুন</h1>
+    <h1 lang-block="en">Get in Touch</h1>
+    <p lang-block="bn">প্রশ্ন, পরামর্শ বা সহায়তার প্রয়োজন? আমরা সবসময় সাহায্য করতে প্রস্তুত</p>
+    <p lang-block="en">Questions, feedback, or need help? We're always ready to assist</p>
+  </div>
+</div>
+
+<div class="container section">
+  <div class="contact-layout">
+    <div class="contact-info-card">
+      <h3 lang-block="bn">যোগাযোগের তথ্য</h3>
+      <h3 lang-block="en">Contact Information</h3>
+      <div class="contact-info-row">
+        <div class="ic">📞</div>
+        <div>
+          <div class="lbl" lang-block="bn">ফোন নম্বর</div>
+          <div class="lbl" lang-block="en" style="display:none;">Phone Number</div>
+          <div class="val">+880 1972-428482</div>
+        </div>
+      </div>
+      <div class="contact-info-row">
+        <div class="ic">✉️</div>
+        <div>
+          <div class="lbl" lang-block="bn">ইমেইল</div>
+          <div class="lbl" lang-block="en" style="display:none;">Email</div>
+          <div class="val">noksha.support@gmail.com</div>
+        </div>
+      </div>
+      <div class="contact-info-row">
+        <div class="ic">📍</div>
+        <div>
+          <div class="lbl" lang-block="bn">ঠিকানা</div>
+          <div class="lbl" lang-block="en" style="display:none;">Address</div>
+          <div class="val" lang-block="bn">ঢাকা, বাংলাদেশ</div>
+          <div class="val" lang-block="en" style="display:none;">Dhaka, Bangladesh</div>
+        </div>
+      </div>
+      <div class="contact-info-row">
+        <div class="ic">🕐</div>
+        <div>
+          <div class="lbl" lang-block="bn">সাপোর্ট সময়</div>
+          <div class="lbl" lang-block="en" style="display:none;">Support Hours</div>
+          <div class="val" lang-block="bn">২৪/৭ সবসময় উপলব্ধ</div>
+          <div class="val" lang-block="en" style="display:none;">Available 24/7</div>
+        </div>
+      </div>
+      <div class="social-row" style="margin-top:24px;">
+        <a href="https://www.facebook.com/MiadKhan.Official90/" target="_blank" title="Facebook">f</a>
+        <a href="https://bd.linkedin.com/in/miadkhanofficial" target="_blank" title="LinkedIn">in</a>
+        <a href="https://www.behance.net/miadkhan" target="_blank" title="Behance">be</a>
+        <a href="https://dribbble.com/miadkhan" target="_blank" title="Dribbble">dr</a>
+        <a href="https://www.pinterest.com/miadkhan_official/" target="_blank" title="Pinterest">pt</a>
+        <a href="https://wa.me/8801972428482" target="_blank" title="WhatsApp">wa</a>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3 lang-block="bn">আমাদের একটি বার্তা পাঠান</h3>
+      <h3 lang-block="en">Send Us a Message</h3>
+      <form onsubmit="return demoSubmit(event, null, document.documentElement.getAttribute('data-lang')==='en' ? 'Message sent — we will reply soon' : 'বার্তা পাঠানো হয়েছে — আমরা শীঘ্রই উত্তর দেব')">
+        <div class="field-row">
+          <div class="field">
+            <label lang-block="bn">পুরো নাম</label><label lang-block="en">Full Name</label>
+            <input type="text" required>
+          </div>
+          <div class="field">
+            <label lang-block="bn">ইমেইল</label><label lang-block="en">Email</label>
+            <input type="email" required>
+          </div>
+        </div>
+        <div class="field">
+          <label lang-block="bn">বিষয়</label><label lang-block="en">Subject</label>
+          <select>
+            <option lang-block="bn">সাধারণ জিজ্ঞাসা</option>
+            <option lang-block="en" style="display:none;">General Inquiry</option>
+            <option lang-block="bn">টেকনিক্যাল সহায়তা</option>
+            <option lang-block="en" style="display:none;">Technical Support</option>
+            <option lang-block="bn">বিলিং প্রশ্ন</option>
+            <option lang-block="en" style="display:none;">Billing Question</option>
+          </select>
+        </div>
+        <div class="field">
+          <label lang-block="bn">বার্তা</label><label lang-block="en">Message</label>
+          <textarea rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" lang-block="bn">বার্তা পাঠান</button>
+        <button type="submit" class="btn btn-primary btn-block" lang-block="en" style="display:none;">Send Message</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>renderFooter();</script>
+<script src="../js/cursor.js"></script>
+<script src="../js/data.js"></script>
+</body>
+</html>

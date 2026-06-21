@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="bn" data-lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../js/theme.js"></script>
+<title>ড্যাশবোর্ড — Noksha</title>
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/pages.css">
+<link rel="stylesheet" href="../css/cursor.css">
+</head>
+<body data-root="..">
+<script src="../js/layout.js"></script>
+<script>renderHeader();</script>
+
+<div class="container section">
+  <div class="dash-shell">
+    <aside class="dash-sidebar">
+      <div class="dash-user">
+        <div class="av">ক</div>
+        <div>
+          <div class="name">মোঃ করিম</div>
+          <div class="role" lang-block="bn">ক্রেতা ও ডিজাইনার</div>
+          <div class="role" lang-block="en" style="display:none;">Buyer & Designer</div>
+        </div>
+      </div>
+      <nav class="dash-nav">
+        <a href="#" class="active" data-tab="overview">📊 <span lang-block="bn">ওভারভিউ</span><span lang-block="en" style="display:none;">Overview</span></a>
+        <a href="#" data-tab="orders">📦 <span lang-block="bn">অর্ডার</span><span lang-block="en" style="display:none;">Orders</span></a>
+        <a href="#" data-tab="downloads">⬇️ <span lang-block="bn">ডাউনলোড</span><span lang-block="en" style="display:none;">Downloads</span></a>
+        <a href="#" data-tab="favorites">❤️ <span lang-block="bn">পছন্দের তালিকা</span><span lang-block="en" style="display:none;">Favorites</span></a>
+        <a href="#" data-tab="earnings">💰 <span lang-block="bn">আয়</span><span lang-block="en" style="display:none;">Earnings</span></a>
+        <a href="profile.html">👤 <span lang-block="bn">প্রোফাইল</span><span lang-block="en" style="display:none;">Profile</span></a>
+        <a href="login.html">🚪 <span lang-block="bn">লগ আউট</span><span lang-block="en" style="display:none;">Log Out</span></a>
+      </nav>
+    </aside>
+
+    <div>
+      <!-- OVERVIEW TAB -->
+      <div class="dash-tab" id="tab-overview">
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="lbl" lang-block="bn">মোট ডাউনলোড</div>
+            <div class="lbl" lang-block="en" style="display:none;">Total Downloads</div>
+            <div class="num">২৮</div>
+            <div class="delta">↑ 12% <span lang-block="bn">এই মাসে</span><span lang-block="en" style="display:none;">this month</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="lbl" lang-block="bn">সক্রিয় অর্ডার</div>
+            <div class="lbl" lang-block="en" style="display:none;">Active Orders</div>
+            <div class="num">৩</div>
+          </div>
+          <div class="stat-card">
+            <div class="lbl" lang-block="bn">পছন্দের ডিজাইন</div>
+            <div class="lbl" lang-block="en" style="display:none;">Favorites</div>
+            <div class="num" id="fav-count">০</div>
+          </div>
+          <div class="stat-card">
+            <div class="lbl" lang-block="bn">সাবস্ক্রিপশন</div>
+            <div class="lbl" lang-block="en" style="display:none;">Subscription</div>
+            <div class="num" style="font-size:18px;" lang-block="bn">প্রো প্ল্যান</div>
+            <div class="num" style="font-size:18px;" lang-block="en" style="display:none;">Pro Plan</div>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <h3 lang-block="bn">সাম্প্রতিক কার্যক্রম</h3>
+          <h3 lang-block="en">Recent Activity</h3>
+          <table class="dash-table">
+            <thead><tr>
+              <th lang-block="bn">ডিজাইন</th><th lang-block="en" style="display:none;">Design</th>
+              <th lang-block="bn">তারিখ</th><th lang-block="en" style="display:none;">Date</th>
+              <th lang-block="bn">স্ট্যাটাস</th><th lang-block="en" style="display:none;">Status</th>
+            </tr></thead>
+            <tbody id="activity-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ORDERS TAB -->
+      <div class="dash-tab" id="tab-orders" style="display:none;">
+        <div class="panel-card">
+          <h3 lang-block="bn">আপনার অর্ডার</h3>
+          <h3 lang-block="en">Your Orders</h3>
+          <table class="dash-table">
+            <thead><tr>
+              <th>ID</th>
+              <th lang-block="bn">তারিখ</th><th lang-block="en" style="display:none;">Date</th>
+              <th lang-block="bn">আইটেম</th><th lang-block="en" style="display:none;">Items</th>
+              <th lang-block="bn">মোট</th><th lang-block="en" style="display:none;">Total</th>
+              <th lang-block="bn">স্ট্যাটাস</th><th lang-block="en" style="display:none;">Status</th>
+            </tr></thead>
+            <tbody id="orders-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- DOWNLOADS TAB -->
+      <div class="dash-tab" id="tab-downloads" style="display:none;">
+        <div class="panel-card">
+          <h3 lang-block="bn">আমার ডাউনলোড</h3>
+          <h3 lang-block="en">My Downloads</h3>
+          <div id="dash-download-list"></div>
+        </div>
+      </div>
+
+      <!-- FAVORITES TAB -->
+      <div class="dash-tab" id="tab-favorites" style="display:none;">
+        <div class="panel-card">
+          <h3 lang-block="bn">পছন্দের তালিকা</h3>
+          <h3 lang-block="en">Favorite Designs</h3>
+          <div class="design-grid" id="fav-grid"></div>
+        </div>
+      </div>
+
+      <!-- EARNINGS TAB -->
+      <div class="dash-tab" id="tab-earnings" style="display:none;">
+        <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);">
+          <div class="stat-card">
+            <div class="lbl" lang-block="bn">মোট আয়</div>
+            <div class="lbl" lang-block="en" style="display:none;">Total Earnings</div>
+            <div class="num">৳১২,৪৫০</div>
+          </div>
+          <div class="stat-card">
+            <div class="lbl" lang-block="bn">এই মাসে</div>
+            <div class="lbl" lang-block="en" style="display:none;">This Month</div>
+            <div class="num">৳২,৮০০</div>
+          </div>
+          <div class="stat-card">
+            <div class="lbl" lang-block="bn">উইথড্রযোগ্য</div>
+            <div class="lbl" lang-block="en" style="display:none;">Withdrawable</div>
+            <div class="num">৳৯,৬৫০</div>
+          </div>
+        </div>
+        <div class="panel-card">
+          <div class="flex-between">
+            <div>
+              <h3 lang-block="bn">টাকা উত্তোলন করুন</h3>
+              <h3 lang-block="en">Withdraw Funds</h3>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="showToast(document.documentElement.getAttribute('data-lang')==='en' ? 'Withdrawal request submitted' : 'উত্তোলনের অনুরোধ জমা হয়েছে')">
+              <span lang-block="bn">উত্তোলনের অনুরোধ</span><span lang-block="en" style="display:none;">Request Withdrawal</span>
+            </button>
+          </div>
+          <p class="muted" lang-block="bn">bKash, Nagad অথবা ব্যাংক একাউন্টে ৩-৫ কর্মদিবসের মধ্যে টাকা পৌঁছে যাবে।</p>
+          <p class="muted" lang-block="en">Funds arrive in 3–5 business days via bKash, Nagad, or bank transfer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>renderFooter();</script>
+<script src="../js/cursor.js"></script>
+<script src="../js/data.js"></script>
+<script>
+  function switchTab(tab) {
+    document.querySelectorAll('.dash-tab').forEach(el => el.style.display = 'none');
+    document.getElementById('tab-' + tab).style.display = 'block';
+    document.querySelectorAll('.dash-nav a[data-tab]').forEach(a => a.classList.toggle('active', a.dataset.tab === tab));
+    if (tab === 'downloads') paintDashDownloads();
+    if (tab === 'favorites') paintFavGrid();
+  }
+
+  function paintActivity() {
+    const lang = document.documentElement.getAttribute('data-lang') || 'bn';
+    const statuses = [
+      { cls: 'live', bn: 'সম্পন্ন', en: 'Completed' },
+      { cls: 'pending', bn: 'প্রক্রিয়াধীন', en: 'Processing' },
+      { cls: 'live', bn: 'সম্পন্ন', en: 'Completed' },
+    ];
+    document.getElementById('activity-body').innerHTML = GB_DESIGNS.slice(0, 3).map((d, i) => `
+      <tr><td>${d.title[lang]}</td><td>১৯ জুন, ২০২৬</td><td><span class="status-pill ${statuses[i].cls}">${statuses[i][lang]}</span></td></tr>
+    `).join('');
+
+    document.getElementById('orders-body').innerHTML = [1,2,3].map(i => `
+      <tr>
+        <td>#GB-2026061${i}</td>
+        <td>১${i} জুন, ২০২৬</td>
+        <td>${i} ${lang === 'en' ? 'item(s)' : 'টি আইটেম'}</td>
+        <td>৳${i * 249}</td>
+        <td><span class="status-pill live">${lang === 'en' ? 'Paid' : 'পরিশোধিত'}</span></td>
+      </tr>`).join('');
+  }
+
+  function paintDashDownloads() {
+    const lang = document.documentElement.getAttribute('data-lang') || 'bn';
+    document.getElementById('dash-download-list').innerHTML = GB_DESIGNS.slice(0, 4).map(d => `
+      <div class="download-item">
+        <div class="swatch ${d.swatch}" style="width:80px;height:80px;border-radius:8px;"></div>
+        <div>
+          <h4>${d.title[lang]}</h4>
+          <span class="file-format-tag">PSD</span><span class="file-format-tag">AI</span>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="showToast('${lang === 'en' ? 'Download started' : 'ডাউনলোড শুরু হয়েছে'}')">⬇ ${lang === 'en' ? 'Download' : 'ডাউনলোড'}</button>
+      </div>`).join('');
+  }
+
+  function paintFavGrid() {
+    const favIds = GBFav.get();
+    const favs = GB_DESIGNS.filter(d => favIds.includes(d.id));
+    document.getElementById('fav-count').textContent = favs.length;
+    const grid = document.getElementById('fav-grid');
+    if (favs.length === 0) {
+      const lang = document.documentElement.getAttribute('data-lang') || 'bn';
+      grid.innerHTML = `<p class="muted">${lang === 'en' ? 'No favorites yet — tap the heart icon on any design.' : 'এখনো কোনো পছন্দের ডিজাইন নেই — যেকোনো ডিজাইনে হার্ট আইকনে ক্লিক করুন।'}</p>`;
+    } else {
+      renderDesignGrid('fav-grid', favs);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    paintActivity();
+    paintFavGrid();
+    document.querySelectorAll('.dash-nav a[data-tab]').forEach(a => {
+      a.addEventListener('click', (e) => { e.preventDefault(); switchTab(a.dataset.tab); });
+    });
+    const urlTab = new URLSearchParams(window.location.search).get('tab');
+    if (urlTab) switchTab(urlTab);
+    document.querySelectorAll('.lang-toggle button').forEach(b => b.addEventListener('click', () => {
+      paintActivity();
+      const activeTab = document.querySelector('.dash-nav a.active')?.dataset.tab;
+      if (activeTab === 'downloads') paintDashDownloads();
+      if (activeTab === 'favorites') paintFavGrid();
+    }));
+  });
+</script>
+</body>
+</html>

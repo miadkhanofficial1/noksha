@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="bn" data-lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../js/theme.js"></script>
+<title>বিক্রেতা/ডিজাইনার — Noksha</title>
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/pages.css">
+<link rel="stylesheet" href="../css/cursor.css">
+</head>
+<body data-root="..">
+<script src="../js/layout.js"></script>
+<script>renderHeader();</script>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">
+      <span lang-block="bn">✦ ১২,০০০+ ডিজাইনার আয় করছেন</span>
+      <span lang-block="en">✦ 12,000+ Designers Earning</span>
+    </div>
+    <h1 lang-block="bn">আপনার ডিজাইন বিক্রি করুন, প্রতি মাসে আয় করুন</h1>
+    <h1 lang-block="en">Sell Your Designs, Earn Every Month</h1>
+    <p lang-block="bn">আপনার তৈরি ব্যানার, পোস্টার, কার্ড ডিজাইন আপলোড করুন এবং হাজারো ক্রেতার কাছে পৌঁছান</p>
+    <p lang-block="en">Upload your banners, posters, and card designs — reach thousands of buyers</p>
+    <a href="signup.html" class="btn btn-primary" lang-block="bn">ডিজাইনার হিসেবে যোগ দিন →</a>
+    <a href="signup.html" class="btn btn-primary" lang-block="en">Join as a Designer →</a>
+  </div>
+</section>
+
+<div class="container section">
+  <div class="section-head">
+    <div>
+      <h2 lang-block="bn">কেন নকশায় বিক্রি করবেন</h2>
+      <h2 lang-block="en">Why Sell on Noksha</h2>
+    </div>
+  </div>
+  <div class="feature-strip">
+    <div class="feature-item">
+      <div class="ic">💰</div>
+      <h4 lang-block="bn">৭০% রেভিনিউ শেয়ার</h4>
+      <h4 lang-block="en">70% Revenue Share</h4>
+      <p lang-block="bn">প্রতিটি বিক্রয়ের সরাসরি বড় অংশ পাবেন আপনি</p>
+      <p lang-block="en">You keep the lion's share of every sale</p>
+    </div>
+    <div class="feature-item">
+      <div class="ic">📊</div>
+      <h4 lang-block="bn">রিয়েল-টাইম অ্যানালিটিক্স</h4>
+      <h4 lang-block="en">Real-Time Analytics</h4>
+      <p lang-block="bn">ডাউনলোড, আয় ও পারফরম্যান্স ট্র্যাক করুন</p>
+      <p lang-block="en">Track downloads, earnings and performance</p>
+    </div>
+    <div class="feature-item">
+      <div class="ic">🏧</div>
+      <h4 lang-block="bn">সহজ উইথড্র</h4>
+      <h4 lang-block="en">Easy Withdrawals</h4>
+      <p lang-block="bn">bKash, Nagad বা ব্যাংকে সরাসরি টাকা তুলুন</p>
+      <p lang-block="en">Withdraw directly to bKash, Nagad or bank</p>
+    </div>
+    <div class="feature-item">
+      <div class="ic">🌐</div>
+      <h4 lang-block="bn">বিশাল ক্রেতা বেইজ</h4>
+      <h4 lang-block="en">Huge Buyer Base</h4>
+      <p lang-block="bn">৮০,০০০+ সক্রিয় সদস্যের কাছে পৌঁছান</p>
+      <p lang-block="en">Reach 80,000+ active members</p>
+    </div>
+  </div>
+</div>
+
+<div class="container section">
+  <div class="panel-card">
+    <h3 lang-block="bn">📤 নতুন ডিজাইন আপলোড করুন</h3>
+    <h3 lang-block="en">📤 Upload a New Design</h3>
+    <form onsubmit="return demoSubmit(event, null, document.documentElement.getAttribute('data-lang')==='en' ? 'Design submitted for review' : 'ডিজাইন পর্যালোচনার জন্য জমা হয়েছে')">
+      <div class="dropzone" style="margin-bottom:18px;">
+        <div class="ic">📁</div>
+        <p lang-block="bn"><strong>ফাইল টেনে আনুন</strong> অথবা ব্রাউজ করতে ক্লিক করুন</p>
+        <p lang-block="en"><strong>Drag files here</strong> or click to browse</p>
+        <p class="muted" style="font-size:12px;">PSD, AI, PNG, JPG — Max 50MB</p>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label lang-block="bn">ডিজাইনের শিরোনাম</label><label lang-block="en">Design Title</label>
+          <input type="text" placeholder="যেমন: ঈদ ব্যানার ডিজাইন" required>
+        </div>
+        <div class="field">
+          <label lang-block="bn">ক্যাটাগরি</label><label lang-block="en">Category</label>
+          <select id="upload-cat"></select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label lang-block="bn">মূল্য (৳)</label><label lang-block="en">Price (৳)</label>
+          <input type="number" placeholder="0 = ফ্রি" min="0">
+        </div>
+        <div class="field">
+          <label lang-block="bn">ট্যাগ (কমা দিয়ে আলাদা করুন)</label><label lang-block="en">Tags (comma separated)</label>
+          <input type="text" placeholder="banner, eid, festival">
+        </div>
+      </div>
+      <div class="field">
+        <label lang-block="bn">বিস্তারিত বিবরণ</label><label lang-block="en">Description</label>
+        <textarea rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" lang-block="bn">পর্যালোচনার জন্য জমা দিন</button>
+      <button type="submit" class="btn btn-primary" lang-block="en" style="display:none;">Submit for Review</button>
+    </form>
+  </div>
+
+  <div class="panel-card">
+    <div class="flex-between">
+      <div>
+        <h3 lang-block="bn">আমার আপলোড করা ডিজাইন</h3>
+        <h3 lang-block="en">My Uploaded Designs</h3>
+      </div>
+    </div>
+    <table class="dash-table">
+      <thead>
+        <tr>
+          <th lang-block="bn">ডিজাইন</th><th lang-block="en" style="display:none;">Design</th>
+          <th lang-block="bn">ক্যাটাগরি</th><th lang-block="en" style="display:none;">Category</th>
+          <th lang-block="bn">মূল্য</th><th lang-block="en" style="display:none;">Price</th>
+          <th lang-block="bn">ডাউনলোড</th><th lang-block="en" style="display:none;">Downloads</th>
+          <th lang-block="bn">স্ট্যাটাস</th><th lang-block="en" style="display:none;">Status</th>
+        </tr>
+      </thead>
+      <tbody id="seller-table-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>renderFooter();</script>
+<script src="../js/cursor.js"></script>
+<script src="../js/data.js"></script>
+<script>
+  function paintSellerPage() {
+    const lang = document.documentElement.getAttribute('data-lang') || 'bn';
+    document.getElementById('upload-cat').innerHTML = GB_CATEGORIES.map(c => `<option>${c[lang]}</option>`).join('');
+    const statuses = [
+      { cls: 'live', bn: 'লাইভ', en: 'Live' },
+      { cls: 'pending', bn: 'পর্যালোচনাধীন', en: 'Pending' },
+      { cls: 'live', bn: 'লাইভ', en: 'Live' },
+      { cls: 'rejected', bn: 'বাতিল', en: 'Rejected' },
+    ];
+    document.getElementById('seller-table-body').innerHTML = GB_DESIGNS.slice(0, 4).map((d, i) => `
+      <tr>
+        <td>${d.title[lang]}</td>
+        <td>${GB_CATEGORIES.find(c => c.id === d.cat)?.[lang] || ''}</td>
+        <td>${priceLabel(d.price, lang)}</td>
+        <td>${d.downloads.toLocaleString()}</td>
+        <td><span class="status-pill ${statuses[i].cls}">${statuses[i][lang]}</span></td>
+      </tr>`).join('');
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    paintSellerPage();
+    document.querySelectorAll('.lang-toggle button').forEach(b => b.addEventListener('click', paintSellerPage));
+  });
+</script>
+</body>
+</html>

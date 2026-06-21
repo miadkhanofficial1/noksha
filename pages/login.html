@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="bn" data-lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../js/theme.js"></script>
+<title>লগইন — Noksha</title>
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/pages.css">
+<link rel="stylesheet" href="../css/cursor.css">
+</head>
+<body data-root="..">
+<script src="../js/layout.js"></script>
+<script>renderHeader();</script>
+
+<div class="auth-shell">
+  <div class="auth-visual">
+    <h2 lang-block="bn">আপনার ডিজাইন জার্নিতে আবার স্বাগতম</h2>
+    <h2 lang-block="en">Welcome back to your design journey</h2>
+    <p lang-block="bn">হাজারো প্রিন্ট-রেডি বাংলা ডিজাইন ফাইলে প্রবেশ করুন এবং আপনার প্রজেক্ট সম্পন্ন করুন।</p>
+    <p lang-block="en">Access thousands of print-ready Bengali design files and finish your project faster.</p>
+    <div class="auth-stats">
+      <div><strong>৫০K+</strong><span lang-block="bn">ডিজাইন ফাইল</span><span lang-block="en" style="display:none;">Design Files</span></div>
+      <div><strong>১২K+</strong><span lang-block="bn">ডিজাইনার</span><span lang-block="en" style="display:none;">Designers</span></div>
+      <div><strong>৮০K+</strong><span lang-block="bn">সদস্য</span><span lang-block="en" style="display:none;">Members</span></div>
+    </div>
+  </div>
+  <div class="auth-form-side">
+    <div class="auth-form-wrap">
+      <h1 lang-block="bn">লগইন করুন</h1>
+      <h1 lang-block="en">Log In</h1>
+      <p class="muted" style="margin-bottom:24px;">
+        <span lang-block="bn">অ্যাকাউন্ট নেই? </span><span lang-block="en" style="display:none;">Don't have an account? </span>
+        <a href="signup.html" style="color:var(--purple-dark); font-weight:700;" lang-block="bn">সাইন আপ করুন</a>
+        <a href="signup.html" style="color:var(--purple-dark); font-weight:700;" lang-block="en">Sign up</a>
+      </p>
+
+      <div class="role-toggle">
+        <button type="button" class="active" data-role="buyer" lang-block="bn">ক্রেতা</button>
+        <button type="button" class="active" data-role="buyer" lang-block="en" style="display:none;">Buyer</button>
+        <button type="button" data-role="seller" lang-block="bn">বিক্রেতা/ডিজাইনার</button>
+        <button type="button" data-role="seller" lang-block="en" style="display:none;">Seller/Designer</button>
+      </div>
+
+      <form onsubmit="return demoSubmit(event, 'dashboard.html', document.documentElement.getAttribute('data-lang')==='en' ? 'Logged in successfully' : 'সফলভাবে লগইন হয়েছে')">
+        <div class="field">
+          <label lang-block="bn">ইমেইল অথবা ফোন নম্বর</label>
+          <label lang-block="en">Email or Phone Number</label>
+          <input type="text" placeholder="example@email.com" required>
+        </div>
+        <div class="field">
+          <label lang-block="bn">পাসওয়ার্ড</label>
+          <label lang-block="en">Password</label>
+          <input type="password" placeholder="••••••••" required>
+        </div>
+        <div class="flex-between" style="margin-bottom:18px;">
+          <label class="checkbox-row"><input type="checkbox"> <span lang-block="bn">মনে রাখুন</span><span lang-block="en" style="display:none;">Remember me</span></label>
+          <a href="#" style="font-size:13px; font-weight:600; color:var(--purple-dark);" lang-block="bn">পাসওয়ার্ড ভুলে গেছেন?</a>
+          <a href="#" style="font-size:13px; font-weight:600; color:var(--purple-dark);" lang-block="en">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" lang-block="bn">লগইন করুন</button>
+        <button type="submit" class="btn btn-primary btn-block" lang-block="en" style="display:none;">Log In</button>
+      </form>
+
+      <div class="form-divider"><span lang-block="bn">অথবা</span><span lang-block="en" style="display:none;">or</span></div>
+      <div class="social-auth-row">
+        <button class="social-auth-btn">🟦 Facebook</button>
+        <button class="social-auth-btn">🟥 Google</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>renderFooter();</script>
+<script src="../js/cursor.js"></script>
+<script src="../js/data.js"></script>
+<script>
+  document.querySelectorAll('.role-toggle button[data-role]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.role-toggle button[data-role="'+btn.dataset.role+'"]').forEach(b=>b.classList.add('active'));
+      document.querySelectorAll('.role-toggle button:not([data-role="'+btn.dataset.role+'"])').forEach(b=>b.classList.remove('active'));
+    });
+  });
+</script>
+</body>
+</html>

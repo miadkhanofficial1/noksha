@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="bn" data-lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../js/theme.js"></script>
+<title>চেকআউট ও পেমেন্ট — Noksha</title>
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/pages.css">
+<link rel="stylesheet" href="../css/cursor.css">
+</head>
+<body data-root="..">
+<script src="../js/layout.js"></script>
+<script>renderHeader();</script>
+
+<div class="container section">
+  <div class="step-row">
+    <div class="step done"><span class="num">✓</span><span lang-block="bn">কার্ট</span><span lang-block="en" style="display:none;">Cart</span></div>
+    <div class="divider"></div>
+    <div class="step active"><span class="num">2</span><span lang-block="bn">পেমেন্ট</span><span lang-block="en" style="display:none;">Payment</span></div>
+    <div class="divider"></div>
+    <div class="step"><span class="num">3</span><span lang-block="bn">নিশ্চিতকরণ</span><span lang-block="en" style="display:none;">Confirmation</span></div>
+  </div>
+
+  <div class="cart-layout">
+    <div>
+      <div class="panel-card">
+        <h3 lang-block="bn">বিলিং তথ্য</h3>
+        <h3 lang-block="en">Billing Information</h3>
+        <div class="field-row">
+          <div class="field">
+            <label lang-block="bn">পুরো নাম</label><label lang-block="en">Full Name</label>
+            <input type="text" placeholder="মোঃ করিম" required>
+          </div>
+          <div class="field">
+            <label lang-block="bn">ফোন নম্বর</label><label lang-block="en">Phone Number</label>
+            <input type="tel" placeholder="01XXXXXXXXX" required>
+          </div>
+        </div>
+        <div class="field">
+          <label lang-block="bn">ইমেইল</label><label lang-block="en">Email</label>
+          <input type="email" placeholder="example@email.com" required>
+        </div>
+        <div class="field">
+          <label lang-block="bn">ঠিকানা (ঐচ্ছিক)</label><label lang-block="en">Address (Optional)</label>
+          <input type="text" placeholder="বাড়ি, রোড, এলাকা, শহর">
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <h3 lang-block="bn">পেমেন্ট পদ্ধতি</h3>
+        <h3 lang-block="en">Payment Method</h3>
+
+        <label class="payment-method-card">
+          <input type="radio" name="pay" checked>
+          <span class="pic">📱</span>
+          <div><div class="name">bKash</div><div class="sub" lang-block="bn">মোবাইল ব্যাংকিং</div><div class="sub" lang-block="en" style="display:none;">Mobile Banking</div></div>
+        </label>
+        <label class="payment-method-card">
+          <input type="radio" name="pay">
+          <span class="pic">📱</span>
+          <div><div class="name">Nagad</div><div class="sub" lang-block="bn">মোবাইল ব্যাংকিং</div><div class="sub" lang-block="en" style="display:none;">Mobile Banking</div></div>
+        </label>
+        <label class="payment-method-card">
+          <input type="radio" name="pay">
+          <span class="pic">💳</span>
+          <div><div class="name" lang-block="bn">ক্রেডিট/ডেবিট কার্ড</div><div class="name" lang-block="en" style="display:none;">Credit/Debit Card</div><div class="sub">Visa, Mastercard</div></div>
+        </label>
+        <label class="payment-method-card">
+          <input type="radio" name="pay">
+          <span class="pic">🏦</span>
+          <div><div class="name" lang-block="bn">ব্যাংক ট্রান্সফার</div><div class="name" lang-block="en" style="display:none;">Bank Transfer</div><div class="sub" lang-block="bn">সরাসরি ব্যাংক একাউন্ট থেকে</div><div class="sub" lang-block="en" style="display:none;">Direct from bank account</div></div>
+        </label>
+
+        <div class="field" style="margin-top:18px;">
+          <label lang-block="bn">মোবাইল নম্বর (bKash/Nagad)</label>
+          <label lang-block="en">Mobile Number (bKash/Nagad)</label>
+          <input type="tel" placeholder="01XXXXXXXXX">
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-card">
+      <h3 lang-block="bn">অর্ডার সারাংশ</h3>
+      <h3 lang-block="en">Order Summary</h3>
+      <div id="checkout-items"></div>
+      <div class="summary-row total">
+        <span lang-block="bn">মোট পরিশোধযোগ্য</span><span lang-block="en" style="display:none;">Total Payable</span>
+        <span class="val" id="checkout-total">৳০</span>
+      </div>
+      <button class="btn btn-primary btn-block" style="margin-top:16px;" onclick="payNow()">
+        <span lang-block="bn">🔒 নিরাপদে পেমেন্ট করুন</span>
+        <span lang-block="en" style="display:none;">🔒 Pay Securely</span>
+      </button>
+      <p class="muted" style="font-size:12px; text-align:center; margin-top:10px;" lang-block="bn">আপনার পেমেন্ট তথ্য সম্পূর্ণ সুরক্ষিত ও এনক্রিপ্টেড</p>
+      <p class="muted" style="font-size:12px; text-align:center; margin-top:10px;" lang-block="en">Your payment info is fully secure and encrypted</p>
+    </div>
+  </div>
+</div>
+
+<script>renderFooter();</script>
+<script src="../js/cursor.js"></script>
+<script src="../js/data.js"></script>
+<script>
+  function paintCheckout() {
+    const lang = document.documentElement.getAttribute('data-lang') || 'bn';
+    const items = GBCart.get();
+    const el = document.getElementById('checkout-items');
+    if (items.length === 0) {
+      el.innerHTML = `<p class="muted">${lang === 'en' ? 'Your cart is empty.' : 'আপনার কার্ট খালি।'}</p>`;
+    } else {
+      el.innerHTML = items.map(it => `
+        <div class="summary-row"><span>${it.title} × ${it.qty}</span><span class="val">${priceLabel(it.price * it.qty, lang)}</span></div>
+      `).join('');
+    }
+    const total = GBCart.total();
+    document.getElementById('checkout-total').textContent = '৳' + Math.round(total * 1.05);
+  }
+
+  function payNow() {
+    const lang = document.documentElement.getAttribute('data-lang') || 'bn';
+    if (GBCart.get().length === 0) {
+      showToast(lang === 'en' ? 'Your cart is empty' : 'আপনার কার্ট খালি');
+      return;
+    }
+    showToast(lang === 'en' ? 'Payment successful! Redirecting...' : 'পেমেন্ট সফল হয়েছে! রিডাইরেক্ট হচ্ছে...');
+    setTimeout(() => {
+      GBCart.clear();
+      window.location.href = 'download.html';
+    }, 1000);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    paintCheckout();
+    document.querySelectorAll('.lang-toggle button').forEach(b => b.addEventListener('click', paintCheckout));
+  });
+</script>
+</body>
+</html>
